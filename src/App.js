@@ -1,24 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import styles from './components/Quiz/Quiz.module.scss';
+import Quiz from './components/Quiz';
+import QuizPage from './pages/QuizPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <div className={styles.headerContainer}>
+          <div className={styles.pagesContainer}>
+            <ul>
+              <li>
+                <Link className={styles.pages} to={'/'}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link className={styles.pages} to={'/quiz'}>
+                  Quiz
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <h2 className={styles.headerText}>
+            How well do you know the TV series "Friends"?
+          </h2>
+        </div>
+        <Switch>
+          <Route exact path={'/'}>
+            <QuizPage />
+          </Route>
+          <Route parh={'/quiz'}>
+            <Quiz />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   );
 }
 
